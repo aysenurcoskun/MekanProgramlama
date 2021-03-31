@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MekanProjeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBLHAKKIMIZDA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACIKLAMA" Type="varchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="TBLILETISIM">
+          <Key>
+            <PropertyRef Name="ILETISIMID" />
+          </Key>
+          <Property Name="ILETISIMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ADISOYADI" Type="varchar" MaxLength="40" />
+          <Property Name="TELEFON" Type="varchar" MaxLength="40" />
+          <Property Name="MAIL" Type="varchar" MaxLength="40" />
+          <Property Name="MESAJ" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="TBLMEKAN">
+          <Key>
+            <PropertyRef Name="MEKANID" />
+          </Key>
+          <Property Name="MEKANID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MEKANRESIM" Type="varchar" MaxLength="100" />
+          <Property Name="MEKANBASLIK" Type="varchar" MaxLength="100" />
+          <Property Name="MEKANBILGI" Type="varchar" MaxLength="3000" />
+          <Property Name="MEKANSEHIR" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="TBLSEHIR">
+          <Key>
+            <PropertyRef Name="SEHIRID" />
+          </Key>
+          <Property Name="SEHIRID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SEHIRAD" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="TBLYORUM">
+          <Key>
+            <PropertyRef Name="YORUMID" />
+          </Key>
+          <Property Name="YORUMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ADSOYAD" Type="varchar" MaxLength="30" />
+          <Property Name="MAIL" Type="varchar" MaxLength="30" />
+          <Property Name="YORUMBILGI" Type="varchar" MaxLength="200" />
+          <Property Name="YORUMMEKAN" Type="int" />
+        </EntityType>
+        <Association Name="FK_TBLMEKAN_TBLSEHIR">
+          <End Role="TBLSEHIR" Type="Self.TBLSEHIR" Multiplicity="0..1" />
+          <End Role="TBLMEKAN" Type="Self.TBLMEKAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLSEHIR">
+              <PropertyRef Name="SEHIRID" />
+            </Principal>
+            <Dependent Role="TBLMEKAN">
+              <PropertyRef Name="MEKANSEHIR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLYORUM_TBLMEKAN">
+          <End Role="TBLMEKAN" Type="Self.TBLMEKAN" Multiplicity="0..1" />
+          <End Role="TBLYORUM" Type="Self.TBLYORUM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLMEKAN">
+              <PropertyRef Name="MEKANID" />
+            </Principal>
+            <Dependent Role="TBLYORUM">
+              <PropertyRef Name="YORUMMEKAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MekanProjeModelStoreContainer">
+          <EntitySet Name="TBLHAKKIMIZDA" EntityType="Self.TBLHAKKIMIZDA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLILETISIM" EntityType="Self.TBLILETISIM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLMEKAN" EntityType="Self.TBLMEKAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLSEHIR" EntityType="Self.TBLSEHIR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLYORUM" EntityType="Self.TBLYORUM" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TBLMEKAN_TBLSEHIR" Association="Self.FK_TBLMEKAN_TBLSEHIR">
+            <End Role="TBLSEHIR" EntitySet="TBLSEHIR" />
+            <End Role="TBLMEKAN" EntitySet="TBLMEKAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLYORUM_TBLMEKAN" Association="Self.FK_TBLYORUM_TBLMEKAN">
+            <End Role="TBLMEKAN" EntitySet="TBLMEKAN" />
+            <End Role="TBLYORUM" EntitySet="TBLYORUM" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MekanProjeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBLHAKKIMIZDA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACIKLAMA" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBLILETISIM">
+          <Key>
+            <PropertyRef Name="ILETISIMID" />
+          </Key>
+          <Property Name="ILETISIMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ADISOYADI" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFON" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="MAIL" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="MESAJ" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBLMEKAN">
+          <Key>
+            <PropertyRef Name="MEKANID" />
+          </Key>
+          <Property Name="MEKANID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MEKANRESIM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MEKANBASLIK" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MEKANBILGI" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+          <Property Name="MEKANSEHIR" Type="Byte" />
+          <NavigationProperty Name="TBLSEHIR" Relationship="Self.FK_TBLMEKAN_TBLSEHIR" FromRole="TBLMEKAN" ToRole="TBLSEHIR" />
+          <NavigationProperty Name="TBLYORUM" Relationship="Self.FK_TBLYORUM_TBLMEKAN" FromRole="TBLMEKAN" ToRole="TBLYORUM" />
+        </EntityType>
+        <EntityType Name="TBLSEHIR">
+          <Key>
+            <PropertyRef Name="SEHIRID" />
+          </Key>
+          <Property Name="SEHIRID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SEHIRAD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBLMEKAN" Relationship="Self.FK_TBLMEKAN_TBLSEHIR" FromRole="TBLSEHIR" ToRole="TBLMEKAN" />
+        </EntityType>
+        <EntityType Name="TBLYORUM">
+          <Key>
+            <PropertyRef Name="YORUMID" />
+          </Key>
+          <Property Name="YORUMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ADSOYAD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="YORUMBILGI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="YORUMMEKAN" Type="Int32" />
+          <NavigationProperty Name="TBLMEKAN" Relationship="Self.FK_TBLYORUM_TBLMEKAN" FromRole="TBLYORUM" ToRole="TBLMEKAN" />
+        </EntityType>
+        <Association Name="FK_TBLMEKAN_TBLSEHIR">
+          <End Role="TBLSEHIR" Type="Self.TBLSEHIR" Multiplicity="0..1" />
+          <End Role="TBLMEKAN" Type="Self.TBLMEKAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLSEHIR">
+              <PropertyRef Name="SEHIRID" />
+            </Principal>
+            <Dependent Role="TBLMEKAN">
+              <PropertyRef Name="MEKANSEHIR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLYORUM_TBLMEKAN">
+          <End Role="TBLMEKAN" Type="Self.TBLMEKAN" Multiplicity="0..1" />
+          <End Role="TBLYORUM" Type="Self.TBLYORUM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLMEKAN">
+              <PropertyRef Name="MEKANID" />
+            </Principal>
+            <Dependent Role="TBLYORUM">
+              <PropertyRef Name="YORUMMEKAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MekanProjeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBLHAKKIMIZDA" EntityType="Self.TBLHAKKIMIZDA" />
+          <EntitySet Name="TBLILETISIM" EntityType="Self.TBLILETISIM" />
+          <EntitySet Name="TBLMEKAN" EntityType="Self.TBLMEKAN" />
+          <EntitySet Name="TBLSEHIR" EntityType="Self.TBLSEHIR" />
+          <EntitySet Name="TBLYORUM" EntityType="Self.TBLYORUM" />
+          <AssociationSet Name="FK_TBLMEKAN_TBLSEHIR" Association="Self.FK_TBLMEKAN_TBLSEHIR">
+            <End Role="TBLSEHIR" EntitySet="TBLSEHIR" />
+            <End Role="TBLMEKAN" EntitySet="TBLMEKAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLYORUM_TBLMEKAN" Association="Self.FK_TBLYORUM_TBLMEKAN">
+            <End Role="TBLMEKAN" EntitySet="TBLMEKAN" />
+            <End Role="TBLYORUM" EntitySet="TBLYORUM" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MekanProjeModelStoreContainer" CdmEntityContainer="MekanProjeEntities">
+          <EntitySetMapping Name="TBLHAKKIMIZDA">
+            <EntityTypeMapping TypeName="MekanProjeModel.TBLHAKKIMIZDA">
+              <MappingFragment StoreEntitySet="TBLHAKKIMIZDA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ACIKLAMA" ColumnName="ACIKLAMA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLILETISIM">
+            <EntityTypeMapping TypeName="MekanProjeModel.TBLILETISIM">
+              <MappingFragment StoreEntitySet="TBLILETISIM">
+                <ScalarProperty Name="ILETISIMID" ColumnName="ILETISIMID" />
+                <ScalarProperty Name="ADISOYADI" ColumnName="ADISOYADI" />
+                <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
+                <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+                <ScalarProperty Name="MESAJ" ColumnName="MESAJ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLMEKAN">
+            <EntityTypeMapping TypeName="MekanProjeModel.TBLMEKAN">
+              <MappingFragment StoreEntitySet="TBLMEKAN">
+                <ScalarProperty Name="MEKANID" ColumnName="MEKANID" />
+                <ScalarProperty Name="MEKANRESIM" ColumnName="MEKANRESIM" />
+                <ScalarProperty Name="MEKANBASLIK" ColumnName="MEKANBASLIK" />
+                <ScalarProperty Name="MEKANBILGI" ColumnName="MEKANBILGI" />
+                <ScalarProperty Name="MEKANSEHIR" ColumnName="MEKANSEHIR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLSEHIR">
+            <EntityTypeMapping TypeName="MekanProjeModel.TBLSEHIR">
+              <MappingFragment StoreEntitySet="TBLSEHIR">
+                <ScalarProperty Name="SEHIRID" ColumnName="SEHIRID" />
+                <ScalarProperty Name="SEHIRAD" ColumnName="SEHIRAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLYORUM">
+            <EntityTypeMapping TypeName="MekanProjeModel.TBLYORUM">
+              <MappingFragment StoreEntitySet="TBLYORUM">
+                <ScalarProperty Name="YORUMID" ColumnName="YORUMID" />
+                <ScalarProperty Name="ADSOYAD" ColumnName="ADSOYAD" />
+                <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+                <ScalarProperty Name="YORUMBILGI" ColumnName="YORUMBILGI" />
+                <ScalarProperty Name="YORUMMEKAN" ColumnName="YORUMMEKAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
