@@ -4,7 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MekanProjeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MekanProjeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBLADMIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kullanıcı" Type="varchar" MaxLength="50" />
+          <Property Name="Sıfre" Type="varchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="TBLHAKKIMIZDA">
           <Key>
             <PropertyRef Name="ID" />
@@ -27,17 +35,26 @@
             <PropertyRef Name="MEKANID" />
           </Key>
           <Property Name="MEKANID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MEKANRESIM" Type="varchar" MaxLength="100" />
+          <Property Name="MEKANRESIM" Type="varchar" MaxLength="1000" />
           <Property Name="MEKANBASLIK" Type="varchar" MaxLength="100" />
           <Property Name="MEKANBILGI" Type="varchar" MaxLength="3000" />
           <Property Name="MEKANSEHIR" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="TBLMESAJ">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdSoyad" Type="varchar" MaxLength="50" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mesaj" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="TBLSEHIR">
           <Key>
             <PropertyRef Name="SEHIRID" />
           </Key>
           <Property Name="SEHIRID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SEHIRAD" Type="varchar" MaxLength="30" />
+          <Property Name="SEHIRAD" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TBLYORUM">
           <Key>
@@ -74,9 +91,11 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MekanProjeModelStoreContainer">
+          <EntitySet Name="TBLADMIN" EntityType="Self.TBLADMIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLHAKKIMIZDA" EntityType="Self.TBLHAKKIMIZDA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLILETISIM" EntityType="Self.TBLILETISIM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLMEKAN" EntityType="Self.TBLMEKAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLMESAJ" EntityType="Self.TBLMESAJ" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLSEHIR" EntityType="Self.TBLSEHIR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLYORUM" EntityType="Self.TBLYORUM" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_TBLMEKAN_TBLSEHIR" Association="Self.FK_TBLMEKAN_TBLSEHIR">
@@ -88,11 +107,18 @@
             <End Role="TBLYORUM" EntitySet="TBLYORUM" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MekanProjeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBLADMIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kullanıcı" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sıfre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="TBLHAKKIMIZDA">
           <Key>
             <PropertyRef Name="ID" />
@@ -115,7 +141,7 @@
             <PropertyRef Name="MEKANID" />
           </Key>
           <Property Name="MEKANID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MEKANRESIM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MEKANRESIM" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="MEKANBASLIK" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="MEKANBILGI" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
           <Property Name="MEKANSEHIR" Type="Byte" />
@@ -127,7 +153,7 @@
             <PropertyRef Name="SEHIRID" />
           </Key>
           <Property Name="SEHIRID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SEHIRAD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SEHIRAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TBLMEKAN" Relationship="Self.FK_TBLMEKAN_TBLSEHIR" FromRole="TBLSEHIR" ToRole="TBLMEKAN" />
         </EntityType>
         <EntityType Name="TBLYORUM">
@@ -165,7 +191,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MekanProjeEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MekanProjeEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBLADMIN" EntityType="Self.TBLADMIN" />
           <EntitySet Name="TBLHAKKIMIZDA" EntityType="Self.TBLHAKKIMIZDA" />
           <EntitySet Name="TBLILETISIM" EntityType="Self.TBLILETISIM" />
           <EntitySet Name="TBLMEKAN" EntityType="Self.TBLMEKAN" />
@@ -179,13 +206,32 @@
             <End Role="TBLMEKAN" EntitySet="TBLMEKAN" />
             <End Role="TBLYORUM" EntitySet="TBLYORUM" />
           </AssociationSet>
+          <EntitySet Name="TBLMESAJ" EntityType="MekanProjeModel.TBLMESAJ" />
         </EntityContainer>
+        <EntityType Name="TBLMESAJ">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mesaj" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MekanProjeModelStoreContainer" CdmEntityContainer="MekanProjeEntities">
+        <EntityContainerMapping StorageEntityContainer="MekanProjeModelStoreContainer" CdmEntityContainer="MekanProjeEntities1">
+          <EntitySetMapping Name="TBLADMIN">
+            <EntityTypeMapping TypeName="MekanProjeModel.TBLADMIN">
+              <MappingFragment StoreEntitySet="TBLADMIN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Kullanıcı" ColumnName="Kullanıcı" />
+                <ScalarProperty Name="Sıfre" ColumnName="Sıfre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TBLHAKKIMIZDA">
             <EntityTypeMapping TypeName="MekanProjeModel.TBLHAKKIMIZDA">
               <MappingFragment StoreEntitySet="TBLHAKKIMIZDA">
@@ -232,6 +278,16 @@
                 <ScalarProperty Name="MAIL" ColumnName="MAIL" />
                 <ScalarProperty Name="YORUMBILGI" ColumnName="YORUMBILGI" />
                 <ScalarProperty Name="YORUMMEKAN" ColumnName="YORUMMEKAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLMESAJ">
+            <EntityTypeMapping TypeName="MekanProjeModel.TBLMESAJ">
+              <MappingFragment StoreEntitySet="TBLMESAJ">
+                <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

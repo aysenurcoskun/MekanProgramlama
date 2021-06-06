@@ -13,10 +13,10 @@ namespace Proje.Mekan.Entity
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MekanProjeEntities : DbContext
+    public partial class MekanProjeEntities1 : DbContext
     {
-        public MekanProjeEntities()
-            : base("name=MekanProjeEntities")
+        public MekanProjeEntities1()
+            : base("name=MekanProjeEntities1")
         {
         }
     
@@ -25,10 +25,12 @@ namespace Proje.Mekan.Entity
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<TBLADMIN> TBLADMIN { get; set; }
         public virtual DbSet<TBLHAKKIMIZDA> TBLHAKKIMIZDA { get; set; }
         public virtual DbSet<TBLILETISIM> TBLILETISIM { get; set; }
         public virtual DbSet<TBLMEKAN> TBLMEKAN { get; set; }
         public virtual DbSet<TBLSEHIR> TBLSEHIR { get; set; }
         public virtual DbSet<TBLYORUM> TBLYORUM { get; set; }
+        public virtual DbSet<TBLMESAJ> TBLMESAJ { get; set; }
     }
 }

@@ -9,7 +9,8 @@ http://www.tooplate.com/view/2092-shelf
 body {
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	font-size: 18px;
-	background: url('../img/shelf-bg.jpg');
+	/*background: url('2092_shelf/img/gq-turkiye-2016-mekanlar-3.jpg');*/
+	background-color:blueviolet;
 	padding: 0 15px;
 	overflow-x: hidden;
 }
@@ -100,7 +101,7 @@ button:focus { outline: none; }
 .tm-site-description { font-size: 1.4rem; }
 
 .tm-site-header {
-	background: url('../img/header-01.jpg') no-repeat;
+	background: url('/2092_shelf/img/gq-turkiye-2016-mekanlar-3.jpg') no-repeat;
 	background-size: cover;
 	height: 300px;
 	padding: 60px 80px;
@@ -164,7 +165,7 @@ button:focus { outline: none; }
 
 /* https://codepen.io/nxworld/pen/ZYNOBZ */
 .tm-gallery-item-overlay {
-	background: #0066CC;
+	background: #ededed;
 	max-width: 240px;
 	margin-left: auto;
 	margin-right: auto;
@@ -174,7 +175,7 @@ button:focus { outline: none; }
 .tm-gallery-item:hover .tm-figcaption {	color: #186e9d; }
 
 .tm-img-center {
-	display: block;
+	display: inline-block;
 	margin-left: auto;
 	margin-right: auto;
 }
